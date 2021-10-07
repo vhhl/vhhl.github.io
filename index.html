@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>interactive visualisation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+<style>
+     body {
+text-align: center;
+font-size:2vh;
+background-color: rgb(34, 25, 54);
+}
+    p{text-align: center; color:aliceblue}
+   
+</style>
+
+
+</head>
+
+<body>
+    <div class="chartBox">
+        <canvas id="myChart">
+
+        </canvas>
+    </div>
+    <div class="buttonBox">
+        <p>Survey year:
+            <input type="radio" name="year" value="2019" onclick="changeChart([0.10, 0.11,0.25,0.04, 0.12, 0.15, 0.11,
+                    0.15, 0.01, 0.14], 'rgba(255,0,0,1)')" />2019
+            <input type="radio" name="year" value="2020" onclick="changeChart([0.20, 0.13,0.15,0.04, 0.1, 0.25, 0.13,
+                    0.17, 0.09, 0.21], 'rgba(0,255,0,1)')" />2020
+            <input type="radio" name="year" value="2021" checked="checked" 
+            onclick="changeChart([0.12, 0.13, 0.32, 0.05, 0.11, 0.22, 0.12, 0.29, 0.03, 0.12],'rgba(0,0,255,1)')" />2021
+        </p>
+    </div>
+    
+    <script>
+        var xValues = ["insomnia", "anhedonia", "unmotivated", "hopeless", "fearful", "agitated", "sad", "nervous", "worthless", "somatic"];
+            
+            const ctx = document.getElementById("myChart");
+            const myChart = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels:xValues,
+                    datasets: [{
+                        fill: false,
+                        lineTension: 0,
+                        backgroundColor: "rgba(0,0,255,1.0)",
+                        borderColor: "rgba(0,0,255,0.1)",
+                        data: [0.12, 0.13, 0.32, 0.05, 0.11, 0.22, 0.12, 0.29, 0.03, 0.12]
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    scales: {
+                        yAxes: [{ ticks: { min: 0, max: 0.30 } }],
+                    }
+                }
+            });
+                function changeChart(data, colour) {
+                    myChart.data.datasets[0].data = data;
+                    myChart.data.datasets[0].backgroundColor = colour;
+                    myChart.update()
+                }
+        </script>
+</body>
+
+</html>
