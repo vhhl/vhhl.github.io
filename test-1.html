@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>PUBH3005: ASS-3 Interactive Visualisation</title>
+    <script
+    src="https://cdn.plot.ly/plotly-2.4.2.min.js">
+    </script>
+    <style>
+              body {
+        background-color:rgba(245, 245, 245, 0.432);
+	      align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+      }
+        p {
+            
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body> 
+<p>Select a group variable to generate the forest plot by outcome</p>
+    <label for="Outcomes">Select a group variable:</label>
+<select name="IVs" id="IVs">
+  <option value="hispanic">Ethnicity</option>
+  <option value="male">Gender</option>
+  <option value="old">Age group</option>
+  <option value="dead">Mortality</option>
+</select>
+</p>
+<br>
+<label for="DVs">Select an outcome:</label>
+<select name="DVs" id="DVs">
+  <option value="ARDS">Acute Respiratory Distress Syndrome</option>
+  <option value="dyspnea">Dyspnea</option>
+  <option value="hypoxemia">Hypoxemia</option>
+  <option value="SBP">Systolic blood pressure</option>
+</select>
+<p> <b> < RESET > </b> </p>
+<hr>
+<p>
+<div id="myDiv">
+    
+</div>
+</p>
+<hr>
+<p>Then, click on the point estimate of the variable to see all outcomes(TBA???)</p>
+<hr>
+<div id="myDiv2">
+    
+</div>
+<hr>
+<div id="myDiv3">
+
+</div>
+
+<script> 
+
+const data = [{"hispanic":0,"male":0,"old":0,"dead":0,"SBP":121.487,"weight":63.4695,"ARDS":0.0088,"dyspnea":0.1766,"hypoxemia":0.0265,"sample":453},
+{"hispanic":1,"male":0,"old":0,"dead":0,"SBP":121.423,"weight":63.8618,"ARDS":0.013,"dyspnea":0.1591,"hypoxemia":0.0273,"sample":3853},
+{"hispanic":0,"male":1,"old":0,"dead":0,"SBP":122.6301,"weight":74.3693,"ARDS":0.012,"dyspnea":0.1687,"hypoxemia":0.0193,"sample":415},
+{"hispanic":1,"male":1,"old":0,"dead":0,"SBP":121.3046,"weight":73.8379,"ARDS":0.0157,"dyspnea":0.1568,"hypoxemia":0.0308,"sample":3501},
+{"hispanic":0,"male":0,"old":1,"dead":0,"SBP":120.0199,"weight":75.756,"ARDS":0.1088,"dyspnea":0.1497,"hypoxemia":0.1293,"sample":147},
+{"hispanic":1,"male":0,"old":1,"dead":0,"SBP":121.0816,"weight":76.4277,"ARDS":0.0702,"dyspnea":0.1758,"hypoxemia":0.0887,"sample":1297},
+{"hispanic":0,"male":1,"old":1,"dead":0,"SBP":122.1498,"weight":90.5307,"ARDS":0.1128,"dyspnea":0.1955,"hypoxemia":0.1128,"sample":133},
+{"hispanic":1,"male":1,"old":1,"dead":0,"SBP":121.566,"weight":89.0143,"ARDS":0.0847,"dyspnea":0.1437,"hypoxemia":0.0979,"sample":1287},
+{"hispanic":0,"male":0,"old":0,"dead":1,"SBP":125.8889,"weight":81.45,"ARDS":0,"dyspnea":0,"hypoxemia":0,"sample":2},
+{"hispanic":1,"male":0,"old":0,"dead":1,"SBP":125.0605,"weight":78.4145,"ARDS":0.2273,"dyspnea":0,"hypoxemia":0.2273,"sample":22},
+{"hispanic":0,"male":1,"old":0,"dead":1,"SBP":110.8,"weight":81.265,"ARDS":0.5,"dyspnea":0,"hypoxemia":0.5,"sample":2},
+{"hispanic":1,"male":1,"old":0,"dead":1,"SBP":120.3677,"weight":91.3292,"ARDS":0.3636,"dyspnea":0,"hypoxemia":0.3636,"sample":33},
+{"hispanic":0,"male":0,"old":1,"dead":1,"SBP":116.8989,"weight":78.9615,"ARDS":0.2308,"dyspnea":0,"hypoxemia":0.2308,"sample":13},
+{"hispanic":1,"male":0,"old":1,"dead":1,"SBP":124.0749,"weight":76.1999,"ARDS":0.2727,"dyspnea":0,"hypoxemia":0.2727,"sample":88},
+{"hispanic":0,"male":1,"old":1,"dead":1,"SBP":121.5481,"weight":92.5458,"ARDS":0,"dyspnea":0,"hypoxemia":0,"sample":11},
+{"hispanic":1,"male":1,"old":1,"dead":1,"SBP":122.7266,"weight":87.6138,"ARDS":0.283,"dyspnea":0,"hypoxemia":0.3019,"sample":106}]
+
+var males_old_data = data.filter(function(result) {
+       return result.old === 1 && result.male === 1;
+     });
+
+var males_young_data = data.filter(function(result) {
+       return result.old === 0 && result.male === 1;
+     });
+
+    var males_old_ards = [];
+    var males_young_ards = [];
+    var males_old_samp = [];
+    var males_young_samp = [];
+    var males_old_dys = [];
+    var males_young_dys = [];
+    var males_old_hyp = [];
+    var males_young_hyp = [];
+for (var i = 0; i<4; i++) {
+  males_old_ards.push(males_old_data[i].ARDS);
+  males_young_ards.push(males_young_data[i].ARDS);
+  males_old_samp.push(males_old_data[i].sample);
+  males_young_samp.push(males_young_data[i].sample);
+  males_old_dys.push(males_old_data[i].dyspnea);
+  males_young_dys.push(males_young_data[i].dyspnea);
+  males_old_hyp.push(males_old_data[i].hypoxemia);
+  males_young_hyp.push(males_young_data[i].hypoxemia);
+}
+
+var females_old_data = data.filter(function(result) {
+       return result.old === 1 && result.male === 0;
+     });
+
+var females_young_data = data.filter(function(result) {
+       return result.old === 0 && result.male === 0;
+     });
+
+    var females_old_ards = [];
+    var females_young_ards = [];
+    var females_old_samp = [];
+    var females_young_samp = [];
+    var females_old_dys = [];
+    var females_young_dys = [];
+    var females_old_hyp = [];
+    var females_young_hyp = [];
+for (var i = 0; i<4; i++) {
+  females_old_ards.push(females_old_data[i].ARDS);
+  females_young_ards.push(females_young_data[i].ARDS);
+  females_old_samp.push(females_old_data[i].sample);
+  females_young_samp.push(females_young_data[i].sample);
+  females_old_dys.push(males_old_data[i].dyspnea);
+  females_young_dys.push(males_young_data[i].dyspnea);
+  females_old_hyp.push(males_old_data[i].hypoxemia);
+  females_young_hyp.push(males_young_data[i].hypoxemia);
+}
+
+function weightedAve(grp_ave, weight) {
+    var c = [];
+    var d = [];
+    for (var i = 0; i < 4; i++) {
+    c.push(grp_ave[i] * weight[i]);
+    d=c.reduce((a,b)=>a+b)/weight.reduce((a,b)=>a+b)
+    }
+    return d;
+}
+
+var y1 = weightedAve(males_old_ards, males_old_samp)
+var y2 =  weightedAve(males_young_ards, males_young_samp)
+var y3 = weightedAve(females_old_ards, females_old_samp)
+var y4 =  weightedAve(females_young_ards, females_young_samp)
+var y5 = weightedAve(males_old_dys, males_old_samp)
+var y6 =  weightedAve(males_young_dys, males_young_samp)
+var y7 = weightedAve(females_old_dys, females_old_samp)
+var y8 =  weightedAve(females_young_dys, females_young_samp)
+var y9 = weightedAve(males_old_hyp, males_old_samp)
+var y10 =  weightedAve(males_young_hyp, males_young_samp)
+var y11 = weightedAve(females_old_hyp, females_old_samp)
+var y12 =  weightedAve(females_young_hyp, females_young_samp)
+
+var yValues=new Array(y1,y2,y3,y4)
+var yValues2=new Array(y5,y6,y7,y8)
+var yValues3=new Array(y9,y10,y11,y12)
+
+var plot = [
+  {
+    x: ['old males', 'young males','old females', 'young females'],
+    y: yValues,
+    mode: 'markers',
+    marker: {
+    color: 'rgb(219, 164, 82)',
+    size: 16
+  }
+}
+],
+layout = {
+    title: {
+            text:"Prevalence of ARDS by demographics",
+            font: {
+      family: 'Tahoma, Geneva',
+      size: 24
+    },
+    xref: 'paper',
+    x: 0.5,
+  },
+  xaxis: {
+    title: {
+      text: 'Age and Gender',
+      font: {
+        family: 'Tahoma, Geneva',
+        size: 16,
+        color: '#7f7f7f'
+      }
+    },
+  },
+  yaxis: {
+    title: {
+      text: 'Acute Respiratory Distress Syndrome',
+      font: {
+        family: 'Tahoma, Geneva',
+        size: 16,
+        color: '#7f7f7f'
+      }
+    }
+  }       
+    
+ };
+var plot2 = [
+  {
+    x: ['old males', 'young males','old females', 'young females'],
+    y: yValues2,
+    mode: 'markers',
+    marker: {
+    color: 'rgb(239, 84, 220)',
+    size: 18
+  }
+}
+],
+layout2 = {
+    title: {
+            text:"Prevalence of Dyspnea by demographics",
+            font: {
+      family: 'Tahoma, Geneva',
+      size: 24
+    },
+    xref: 'paper',
+    x: 0.5,
+  },
+  xaxis: {
+    title: {
+      text: 'Age and Gender',
+      font: {
+        family: 'Tahoma, Geneva',
+        size: 16,
+        color: '#7f7f7f'
+      }
+    },
+  },
+  yaxis: {
+    title: {
+      text: 'Dyspnea',
+      font: {
+        family: 'Tahoma, Geneva',
+        size: 16,
+        color: '#7f7f7f'
+      }
+    }
+  }       
+    
+ };
+ 
+var plot3 = [
+  {
+    x: ['old males', 'young males','old females', 'young females'],
+    y: yValues3,
+    mode: 'markers',
+    marker: {
+    color: 'rgb(199, 80, 62)',
+    size: 16
+  }
+}
+],
+layout3 = {
+    title: {
+            text:"Prevalence of Hypoxemia by demographics",
+            font: {
+      family: 'Tahoma, Geneva',
+      size: 24
+    },
+    xref: 'paper',
+    x: 0.5,
+  },
+  xaxis: {
+    title: {
+      text: 'Age and Gender',
+      font: {
+        family: 'Tahoma, Geneva',
+        size: 16,
+        color: '#7f7f7f'
+      }
+    },
+  },
+  yaxis: {
+    title: {
+      text: 'Hypoxemia',
+      font: {
+        family: 'Tahoma, Geneva',
+        size: 16,
+        color: '#7f7f7f'
+      }
+    }
+  }       
+    
+ };
+Plotly.newPlot('myDiv', plot, layout);
+Plotly.newPlot('myDiv2', plot2, layout2);
+Plotly.newPlot('myDiv3', plot3, layout3);
+
+</script>
+</body>
+</html>
