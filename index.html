@@ -34,7 +34,9 @@
             font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             border-collapse: collapse;
         }
-        
+        a, u {
+  		text-decoration: none;
+	}
         .dropbtn {
   background-color: #3498DB;
   color: white;
@@ -84,7 +86,7 @@
 </head>
 
 <body> 
-<h1>Select an outcome to view the plot<a id="top"></a></h1>
+<h1>Select an outcome to view the prevalence rate<a id="top"></a></h1>
      
 <br>
  <div class="dropdown">
@@ -97,9 +99,9 @@
 </div>
 <p></p>
 <hr>
-<p>
+<p> Total number of hospital admitions during this period. Hover pointer over pie chart to view details</p>
 <div id="myDiv">
-    
+   
 </div>
 <br>
 <hr>
@@ -426,23 +428,24 @@ var plot4 = [{
   values: [453, 3853,147, 1297, 2, 22, 13, 88],
   labels: ['Recovered, young non-Hispanic', 'Recovered, young Hispanic', 'Recovered, old non-Hispanic', 'Recovered, old Hispanic', 'Deceased, young non-Hispanic', 'Deceased, young Hispanic', 'Deceased, old non-Hispanic', 'Deceased, old Hispanic' ],
   domain: {column: 0},
-  name: 'Female_sampling_prop',
-  hoverinfo: 'label+percent',
+  name: 'Female patient',
+  hoverinfo: 'name+label+percent',
   hole: .5,
-  type: 'pie'
+  type: 'pie',
+  automargin: true
 
 },{
   values: [415, 3501, 133, 1287, 2, 33, 11, 106],
   labels: ['Recovered, young non-Hispanic', 'Recovered, young Hispanic', 'Recovered, old non-Hispanic', 'Recovered, old Hispanic', 'Deceased, young non-Hispanic', 'Deceased, young Hispanic', 'Deceased, old non-Hispanic', 'Deceased, old Hispanic' ],
   domain: {column: 1},
-  name: 'Male_sampling_prop',
-  hoverinfo: 'label+percent',
+  name: 'Male patient',
+  hoverinfo: 'name+label+percent',
   hole: .4,
   type: 'pie'
 }];
              
 layout4 = {
-  title: 'Proportion of outpatients by groups',
+  title: 'Proportion of total patient\'s COVID-19 outcome by groups',
   annotations: [
     {
       font: {
@@ -450,7 +453,7 @@ layout4 = {
       },
       showarrow: false,
       text: 'Female',
-      x: 0.18, y: 0.5
+      x: 0.21, y: 0.5
     },
     {
       font: {
@@ -458,7 +461,7 @@ layout4 = {
       },
       showarrow: false,
       text: 'Male',
-      x: 0.79, y: 0.5
+      x: 0.78, y: 0.5
     }
   ],
   showlegend: false,
