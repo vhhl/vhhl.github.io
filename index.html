@@ -3,69 +3,476 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    <title>interactive visualisation</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TESTING TESTING data visualisation</title>
+    <script src="https://cdn.plot.ly/plotly-2.4.2.min.js">
     </script>
-<style>
-     body {
-text-align: center;
-font-size:2vh;
-background-color: rgb(34, 25, 54);
+    <style>
+        body {
+        background-color:rgba(245, 245, 245, 0.432);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+        font-size: 2.5vh;
+      }
+        p {
+           line-height: 1.8;
+           margin-left: 50px;
+           margin-right: 50px;
+           font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+           text-align: center;
+        }
+        h1 {
+            color: rgb(14, 107, 5);
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            font-size: 2vw;
+        }
+        .center{
+            width: 80%;
+            margin-left: 10%;
+            margin-right: 10%;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border-collapse: collapse;
+        }
+        
+        .dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
 }
-    p{text-align: center; color:aliceblue}
-   
-</style>
 
 
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 300px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  overflow: auto
+  
+}
+
+.dropdown-content a:hover {background-color: #ddd}
+
+.show {display:block;}        
+        
+        
+    </style>
 </head>
 
-<body>
-    <div class="chartBox">
-        <canvas id="myChart">
-
-        </canvas>
-    </div>
-    <div class="buttonBox">
-        <p>Survey year:
-            <input type="radio" name="year" value="2019" onclick="changeChart([0.10, 0.11,0.25,0.04, 0.12, 0.15, 0.11,
-                    0.15, 0.01, 0.14], 'rgba(255,0,0,1)')" />2019
-            <input type="radio" name="year" value="2020" onclick="changeChart([0.20, 0.13,0.15,0.04, 0.1, 0.25, 0.13,
-                    0.17, 0.09, 0.21], 'rgba(0,255,0,1)')" />2020
-            <input type="radio" name="year" value="2021" checked="checked" 
-            onclick="changeChart([0.12, 0.13, 0.32, 0.05, 0.11, 0.22, 0.12, 0.29, 0.03, 0.12],'rgba(0,0,255,1)')" />2021
-        </p>
-    </div>
+<body> 
+<h1>Select an outcome to view the plot<a id="top"></a></h1>
+     
+<br>
+ <div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Outcomes</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#aRDS">Acute Respiratory Distress Syndrome</a>
+    <a href="#dysp">Dyspnea</a>
+    <a href="#hypo">hypoxemia</a>
+  </div>
+</div>
+<p></p>
+<hr>
+<p>
+<div id="myDiv">
     
-    <script>
-        var xValues = ["insomnia", "anhedonia", "unmotivated", "hopeless", "fearful", "agitated", "sad", "nervous", "worthless", "somatic"];
-            
-            const ctx = document.getElementById("myChart");
-            const myChart = new Chart(ctx, {
-                type: "bar",
-                data: {
-                    labels:xValues,
-                    datasets: [{
-                        fill: false,
-                        lineTension: 0,
-                        backgroundColor: "rgba(0,0,255,1.0)",
-                        borderColor: "rgba(0,0,255,0.1)",
-                        data: [0.12, 0.13, 0.32, 0.05, 0.11, 0.22, 0.12, 0.29, 0.03, 0.12]
-                    }]
-                },
-                options: {
-                    legend: { display: false },
-                    scales: {
-                        yAxes: [{ ticks: { min: 0, max: 0.30 } }],
-                    }
-                }
-            });
-                function changeChart(data, colour) {
-                    myChart.data.datasets[0].data = data;
-                    myChart.data.datasets[0].backgroundColor = colour;
-                    myChart.update()
-                }
-        </script>
-</body>
+</div>
+<br>
+<hr>
+<p>Select from outcomes to view prevalence rate by demographics</p>
+<hr>
+<div>
+<p id="aRDS"></p>
+    <a href="#top"><i>Top</i></a>
+    </div>
+<div id="myDiv2">
+    </div>
+<hr>
+<div>
+<p id="dysp"></p>
+    <a href="#top"><i>Top</i></a>
+</div>
+<div id="myDiv3">
+    </div>
+<hr>
+<div>
+<p id=hypo></p>
+    <a href="#top"><i>Top</i></a>
+</div>  
+<div id="myDiv4">
+    </div>
+  
+<script>  
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+    window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+  
+//function Reset() {
+        //var dropDown = document.getElementById("outcome");
+        //dropDown.selectedIndex = 0;
+    //}      
+    
+const data = [{"hispanic":0,"male":0,"old":0,"dead":0,"SBPs":121.487,"weight":63.4695,"ARDS":0.0088,"dyspnea":0.1766,"hypoxemia":0.0265,"sample":453},
+{"hispanic":1,"male":0,"old":0,"dead":0,"SBPs":121.423,"weight":63.8618,"ARDS":0.013,"dyspnea":0.1591,"hypoxemia":0.0273,"sample":3853},
+{"hispanic":0,"male":1,"old":0,"dead":0,"SBPs":122.6301,"weight":74.3693,"ARDS":0.012,"dyspnea":0.1687,"hypoxemia":0.0193,"sample":415},
+{"hispanic":1,"male":1,"old":0,"dead":0,"SBPs":121.3046,"weight":73.8379,"ARDS":0.0157,"dyspnea":0.1568,"hypoxemia":0.0308,"sample":3501},
+{"hispanic":0,"male":0,"old":1,"dead":0,"SBPs":120.0199,"weight":75.756,"ARDS":0.1088,"dyspnea":0.1497,"hypoxemia":0.1293,"sample":147},
+{"hispanic":1,"male":0,"old":1,"dead":0,"SBPs":121.0816,"weight":76.4277,"ARDS":0.0702,"dyspnea":0.1758,"hypoxemia":0.0887,"sample":1297},
+{"hispanic":0,"male":1,"old":1,"dead":0,"SBPs":122.1498,"weight":90.5307,"ARDS":0.1128,"dyspnea":0.1955,"hypoxemia":0.1128,"sample":133},
+{"hispanic":1,"male":1,"old":1,"dead":0,"SBPs":121.566,"weight":89.0143,"ARDS":0.0847,"dyspnea":0.1437,"hypoxemia":0.0979,"sample":1287},
+{"hispanic":0,"male":0,"old":0,"dead":1,"SBPs":125.8889,"weight":81.45,"ARDS":0,"dyspnea":0,"hypoxemia":0,"sample":2},
+{"hispanic":1,"male":0,"old":0,"dead":1,"SBPs":125.0605,"weight":78.4145,"ARDS":0.2273,"dyspnea":0,"hypoxemia":0.2273,"sample":22},
+{"hispanic":0,"male":1,"old":0,"dead":1,"SBPs":110.8,"weight":81.265,"ARDS":0.5,"dyspnea":0,"hypoxemia":0.5,"sample":2},
+{"hispanic":1,"male":1,"old":0,"dead":1,"SBPs":120.3677,"weight":91.3292,"ARDS":0.3636,"dyspnea":0,"hypoxemia":0.3636,"sample":33},
+{"hispanic":0,"male":0,"old":1,"dead":1,"SBPs":116.8989,"weight":78.9615,"ARDS":0.2308,"dyspnea":0,"hypoxemia":0.2308,"sample":13},
+{"hispanic":1,"male":0,"old":1,"dead":1,"SBPs":124.0749,"weight":76.1999,"ARDS":0.2727,"dyspnea":0,"hypoxemia":0.2727,"sample":88},
+{"hispanic":0,"male":1,"old":1,"dead":1,"SBPs":121.5481,"weight":92.5458,"ARDS":0,"dyspnea":0,"hypoxemia":0,"sample":11},
+{"hispanic":1,"male":1,"old":1,"dead":1,"SBPs":122.7266,"weight":87.6138,"ARDS":0.283,"dyspnea":0,"hypoxemia":0.3019,"sample":106}]
 
+    
+
+var hispanic_data = data.filter(obj => {
+      return obj.hispanic == 1
+    })
+    
+var males_data = data.filter(obj => {
+      return obj.male == 1
+    })
+
+var old_data = data.filter(obj => {
+      return obj.old == 1
+    })
+
+var dead_data = data.filter(obj => {
+      return obj.dead == 1
+    })
+  
+var sample = [];
+for (var i = 0; i<16; i++) {
+    sample.push(data[i].sample);  
+    }    
+
+var males_old_data = data.filter(function(result) {
+       return result.old === 1 && result.male === 1;
+     });
+
+var males_young_data = data.filter(function(result) {
+       return result.old === 0 && result.male === 1;
+     });
+    
+//var males_dead = data.filter(function(result) {
+        //return result.dead === 1 && result.male === 1;
+     //});
+
+    
+    var males_old_ards = [];
+    var males_young_ards = [];
+    var males_old_samp = [];
+    var males_young_samp = [];
+    var males_old_dys = [];
+    var males_young_dys = [];
+    var males_old_hyp = [];
+    var males_young_hyp = [];
+    var males_old_SBPs = [];
+    var males_young_SBPs = [];
+for (var i = 0; i<4; i++) {
+  males_old_ards.push(males_old_data[i].ARDS);
+  males_young_ards.push(males_young_data[i].ARDS);
+  males_old_samp.push(males_old_data[i].sample);
+  males_young_samp.push(males_young_data[i].sample);
+  males_old_dys.push(males_old_data[i].dyspnea);
+  males_young_dys.push(males_young_data[i].dyspnea);
+  males_old_hyp.push(males_old_data[i].hypoxemia);
+  males_young_hyp.push(males_young_data[i].hypoxemia);
+  males_old_SBPs.push(males_old_data[i].SBPs);
+  males_young_SBPs.push(males_young_data[i].SBPs);
+}
+
+var females_old_data = data.filter(function(result) {
+       return result.old === 1 && result.male === 0;
+     });
+
+var females_young_data = data.filter(function(result) {
+       return result.old === 0 && result.male === 0;
+     });
+    
+var females_dead = data.filter(function(result) {
+       return result.dead === 1 && result.male === 0;
+     });
+
+
+    var females_old_ards = [];
+    var females_young_ards = [];
+    var females_old_samp = [];
+    var females_young_samp = [];
+    var females_old_dys = [];
+    var females_young_dys = [];
+    var females_old_hyp = [];
+    var females_young_hyp = [];
+    var females_old_SBPs = [];
+    var females_young_SBPs = [];
+for (var i = 0; i<4; i++) {
+  females_old_ards.push(females_old_data[i].ARDS);
+  females_young_ards.push(females_young_data[i].ARDS);
+  females_old_samp.push(females_old_data[i].sample);
+  females_young_samp.push(females_young_data[i].sample);
+  females_old_dys.push(males_old_data[i].dyspnea);
+  females_young_dys.push(males_young_data[i].dyspnea);
+  females_old_hyp.push(males_old_data[i].hypoxemia);
+  females_young_hyp.push(males_young_data[i].hypoxemia);
+  females_old_SBPs.push(males_old_data[i].SBPs);
+  females_young_SBPs.push(males_young_data[i].SBPs);
+}
+
+function weightedAve(grp_ave, weight) {
+    var c = [];
+    var d = [];
+    for (var i = 0; i < weight.length; i++) {
+    c.push(grp_ave[i] * weight[i]);
+    d=c.reduce((a,b)=>a+b)/weight.reduce((a,b)=>a+b)
+    }
+    return d;
+}
+
+var y1 = weightedAve(males_old_ards, males_old_samp)
+var y2 =  weightedAve(males_young_ards, males_young_samp)
+var y3 = weightedAve(females_old_ards, females_old_samp)
+var y4 =  weightedAve(females_young_ards, females_young_samp)
+var y5 = weightedAve(males_old_dys, males_old_samp)
+var y6 =  weightedAve(males_young_dys, males_young_samp)
+var y7 = weightedAve(females_old_dys, females_old_samp)
+var y8 =  weightedAve(females_young_dys, females_young_samp)
+var y9 = weightedAve(males_old_hyp, males_old_samp)
+var y10 =  weightedAve(males_young_hyp, males_young_samp)
+var y11 = weightedAve(females_old_hyp, females_old_samp)
+var y12 =  weightedAve(females_young_hyp, females_young_samp)
+var y13 = weightedAve(males_old_SBPs, males_old_samp)
+var y14 =  weightedAve(males_young_SBPs, males_young_samp)
+var y15 = weightedAve(females_old_SBPs, females_old_samp)
+var y16 =  weightedAve(females_young_SBPs, females_young_samp)
+
+var yValues=new Array(y1,y2,y3,y4)
+var yValues2=new Array(y5,y6,y7,y8)
+var yValues3=new Array(y9,y10,y11,y12)
+var yValues4=new Array(y13,y14,y15,y16)
+
+
+//plot setting
+var plot = [{ x: ['old males', 'young males','old females', 'young females'], y: yValues,
+    mode: 'markers',
+    marker: {
+    color: 'rgb(219, 164, 82)',
+    size: 16
+  }
+}
+],
+layout = {
+    title: {
+            text:"Prevalence of ARDS by demographics",
+            font: {
+      family: 'Tahoma, Geneva',
+      size: 24
+    },
+    xref: 'paper',
+    x: 0.5,
+  },
+  xaxis: {
+    title: {
+      text: 'Age and Gender',
+      font: {
+        family: 'Tahoma, Geneva',
+        size: 16,
+        color: '#7f7f7f'
+      }
+    },
+  },
+  yaxis: {
+    title: {
+      text: 'Acute Respiratory Distress Syndrome',
+      font: {
+        family: 'Tahoma, Geneva',
+        size: 16,
+        color: '#7f7f7f'
+      }
+    }
+  }       
+    
+ };
+var plot2 = [
+  {
+    x: ['old males', 'young males','old females', 'young females'],
+    y: yValues2,
+    mode: 'markers',
+    marker: {
+    color: 'rgb(239, 84, 220)',
+    size: 18
+  }
+}
+],
+layout2 = {
+    title: {
+            text:"Prevalence of Dyspnea by demographics",
+            font: {
+      family: 'Tahoma, Geneva',
+      size: 24
+    },
+    xref: 'paper',
+    x: 0.5,
+  },
+  xaxis: {
+    title: {
+      text: 'Age and Gender',
+      font: {
+        family: 'Tahoma, Geneva',
+        size: 16,
+        color: '#7f7f7f'
+      }
+    },
+  },
+  yaxis: {
+    title: {
+      text: 'Dyspnea',
+      font: {
+        family: 'Tahoma, Geneva',
+        size: 16,
+        color: '#7f7f7f'
+      }
+    }
+  }       
+    
+ };
+ 
+var plot3 = [
+  {
+    x: ['old males', 'young males','old females', 'young females'],
+    y: yValues3,
+    mode: 'markers',
+    marker: {
+    color: 'rgb(199, 80, 62)',
+    size: 16
+  }
+}
+],
+layout3 = {
+    title: {
+            text:"Prevalence of Hypoxemia by demographics",
+            font: {
+      family: 'Tahoma, Geneva',
+      size: 24
+    },
+    xref: 'paper',
+    x: 0.5,
+  },
+  xaxis: {
+    title: {
+      text: 'Age and Gender',
+      font: {
+        family: 'Tahoma, Geneva',
+        size: 16,
+        color: '#7f7f7f'
+      }
+    },
+  },
+  yaxis: {
+    title: {
+      text: 'Hypoxemia',
+      font: {
+        family: 'Tahoma, Geneva',
+        size: 16,
+        color: '#7f7f7f'
+      }
+    }
+  }       
+    
+ };
+
+var plot4 = [{
+  values: [453, 3853,147, 1297, 2, 22, 13, 88],
+  labels: ['Recovered, young non-Hispanic', 'Recovered, young Hispanic', 'Recovered, old non-Hispanic', 'Recovered, old Hispanic', 'Deceased, young non-Hispanic', 'Deceased, young Hispanic', 'Deceased, old non-Hispanic', 'Deceased, old Hispanic' ],
+  domain: {column: 0},
+  name: 'Female_sampling_prop',
+  hoverinfo: 'label+percent',
+  hole: .5,
+  type: 'pie'
+
+},{
+  values: [415, 3501, 133, 1287, 2, 33, 11, 106],
+  labels: ['Recovered, young non-Hispanic', 'Recovered, young Hispanic', 'Recovered, old non-Hispanic', 'Recovered, old Hispanic', 'Deceased, young non-Hispanic', 'Deceased, young Hispanic', 'Deceased, old non-Hispanic', 'Deceased, old Hispanic' ],
+  domain: {column: 1},
+  name: 'Male_sampling_prop',
+  hoverinfo: 'label+percent',
+  hole: .4,
+  type: 'pie'
+}];
+             
+layout4 = {
+  title: 'Proportion of outpatients by groups',
+  annotations: [
+    {
+      font: {
+        size: 25
+      },
+      showarrow: false,
+      text: 'Female',
+      x: 0.18, y: 0.5
+    },
+    {
+      font: {
+        size: 23
+      },
+      showarrow: false,
+      text: 'Male',
+      x: 0.79, y: 0.5
+    }
+  ],
+  showlegend: false,
+  grid: {rows: 1, columns: 2}
+};    
+     
+ Plotly.newPlot('myDiv2', plot, layout);
+ 
+ Plotly.newPlot('myDiv3', plot2, layout2);
+ 
+ Plotly.newPlot('myDiv4', plot3, layout3);
+ 
+ Plotly.newPlot('myDiv', plot4, layout4);
+
+    </script>    
+</body>
 </html>
