@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TESTING TESTING dog visualisation</title>
+    <script src="https://cdn.plot.ly/plotly-2.4.2.min.js">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        body {
+        background-color:rgba(245, 245, 245, 0.432);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        text-align: center;
+        font-size: 2.5vh;
+      }
+        p {
+           line-height: 1.8;
+           margin-left: 50px;
+           margin-right: 50px;
+           font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+           text-align: center;
+        }
+        h1 {
+            color: rgb(14, 107, 5);
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            font-size: 2vw;
+        }
+        .center{
+            width: 80%;
+            margin-left: 10%;
+            margin-right: 10%;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border-collapse: collapse;
+        }
+        a, u {
+  		text-decoration: none;
+	}
+        .dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 300px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  overflow: auto
+  
+}
+
+.dropdown-content a:hover {background-color: #ddd}
+
+.show {display:block;}     
+
+.fit-picture {
+    width: 1000px;
+}
+        
+        
+    </style>
+</head>
+
+<body> 
+<h1>Select a dog breed to match your personality <a id="top"></a></h1>
+     
+<br>
+<label for="outcomes">Choose a dog:</label>
+
+<select name="outcomes" id="outcomes">
+<option value="none">--Make selection--</option>  
+<option value="dog1">Just vaxed</option>	  
+<option value="dog2">Survivor fans</option>
+<option value="dog3">Brave hunter</option>
+<option value="dog4">Paris Hilton</option>
+<option value="dog5">Have no clue</option>
+<option value="dog6">Bubble Tea addict</option>
+<option value="dog7">Captain America</option>
+<option value="dog8">Sun bather</option>
+<option value="dog9">Santa's little helper</option>
+<option value="dog10">Just cute</option>
+<option value="dog11">Party queen</option>
+</select>
+ <!--<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Outcomes</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#aRDS">Acute Respiratory Distress Syndrome</a>
+    <a href="#dysp">Dyspnea</a>
+    <a href="#hypo">hypoxemia</a>
+  </div>-->
+</div>
+<p>No animals actually participated in this experiment</p>
+<hr>
+<div id="none-container"></div>
+<!--<div id="myDiv1">
+   
+</div>-->
+<br>
+<hr>
+<div id="dog1-container">
+  <div>
+    <p id="dog1"><img class="fit-picture"
+      src="././image/dog/1bloodhound.jpg"
+      alt="Photo of dog breed AA"></p>
+  </div>
+  <!--<div id="myDiv2">
+  </div>-->
+</div>
+<!--<hr> -->
+<div id="dog2-container">
+  <div>
+    <p id="dog2"><img class="fit-picture"
+      src="././image/dog/2antice.jpg"
+      alt="Photo of dog breed AB"></p>
+  </div>
+  <!--<div id="myDiv3">
+  </div>-->
+</div>
+<!--<hr>-->
+<div id="dog3-container">
+  <div>
+    <p id="dog3"><img class="fit-picture"
+      src="././image/dog/3brave.jpg"
+      alt="Photo of dog breed AC"></p></p>
+  </div>  
+  </div>
+<div id="dog4-container">
+    <div>
+      <p id="dog4"><img class="fit-picture"
+        src="././image/dog/4content.jpg"
+        alt="Photo of dog breed AD"></p></p>
+    </div>  
+    </div>
+<div id="dog5-container">
+      <div>
+        <p id="dog5"><img class="fit-picture"
+          src="././image/dog/5curious.jpg"
+          alt="Photo of dog breed AE"></p></p>
+      </div>  
+      </div>
+<div id="dog6-container">
+        <div>
+          <p id="dog6"><img class="fit-picture"
+            src="././image/dog/6drink.jpg"
+            alt="Photo of dog breed AF"></p></p>
+        </div>  
+        </div>
+<div id="dog7-container">
+          <div>
+            <p id="dog7"><img class="fit-picture"
+              src="././image/dog/7kelpe.jpg"
+              alt="Photo of dog breed AG"></p></p>
+          </div>  
+          </div>
+<div id="dog8-container">
+            <div>
+              <p id="dog8"><img class="fit-picture"
+                src="././image/dog/8relax.jpg"
+                alt="Photo of dog breed AH"></p></p>
+            </div>  
+            </div>
+<div id="dog9-container">
+              <div>
+                <p id="dog9"><img class="fit-picture"
+                  src="././image/dog/9santa.jpg"
+                  alt="Photo of dog breed AI"></p></p>
+              </div>  
+              </div>
+<div id="dog10-container">
+                <div>
+                  <p id="dog10"><img class="fit-picture"
+                    src="././image/dog/10stare.jpg"
+                    alt="Photo of dog breed AJ"></p></p>
+                </div>  
+                </div>
+<div id="dog11-container">
+                  <div>
+                    <p id="dog11"><img class="fit-picture"
+                      src="././image/dog/11wink.jpg"
+                      alt="Photo of dog breed AK"></p></p>
+                  </div>  
+                  </div>
+<script>  
+
+
+ $(document).ready(function(){
+    $("select").change(function(){
+        $(this).find("option:selected").each(function(){
+            var optionValue = $(this).attr("value");
+            if(optionValue == 'none'){
+              $("#none-container").show();
+              $("#dog1-container").hide();
+              $("#dog2-container").hide();
+              $("#dog3-container").hide();
+              $("#dog4-container").hide();
+              $("#dog5-container").hide();
+              $("#dog6-container").hide();
+              $("#dog7-container").hide();
+              $("#dog8-container").hide();
+              $("#dog9-container").hide();
+              $("#dog10-container").hide();
+              $("#dog11-container").hide();
+            
+              $('html, body').animate({
+                  scrollTop: $("#none-container").offset().top
+              }, 2000);
+            }
+            else if(optionValue == 'dog1'){
+              $("#none-container").hide();
+              $("#dog1-container").show();
+              $("#dog2-container").hide();
+              $("#dog3-container").hide();
+              $("#dog4-container").hide();
+              $("#dog5-container").hide();
+              $("#dog6-container").hide();
+              $("#dog7-container").hide();
+              $("#dog8-container").hide();
+              $("#dog9-container").hide();
+              $("#dog10-container").hide();
+              $("#dog11-container").hide();
+
+              $('html, body').animate({
+                  scrollTop: $("#dog1-container").offset().top
+              }, 2000);
+            }
+            else if(optionValue == 'dog2')
+            {
+              $("#none-container").hide();
+              $("#dog1-container").hide();
+              $("#dog2-container").show();
+              $("#dog3-container").hide();
+              $("#dog4-container").hide();
+              $("#dog5-container").hide();
+              $("#dog6-container").hide();
+              $("#dog7-container").hide();
+              $("#dog8-container").hide();
+              $("#dog9-container").hide();
+              $("#dog10-container").hide();
+              $("#dog11-container").hide();
+
+              $('html, body').animate({
+                  scrollTop: $("#dog2-container").offset().top
+              }, 2000);
+            }
+            else if(optionValue == 'dog3')
+            {
+              $("#none-container").hide();
+              $("#dog1-container").hide();
+              $("#dog2-container").hide();
+              $("#dog3-container").show();
+              $("#dog4-container").hide();
+              $("#dog5-container").hide();
+              $("#dog6-container").hide();
+              $("#dog7-container").hide();
+              $("#dog8-container").hide();
+              $("#dog9-container").hide();
+              $("#dog10-container").hide();
+              $("#dog11-container").hide();
+
+              $('html, body').animate({
+                  scrollTop: $("#dog3-container").offset().top
+              }, 2000);
+            }
+            else if(optionValue == 'dog4')
+            {
+              $("#none-container").hide();
+              $("#dog1-container").hide();
+              $("#dog2-container").hide();
+              $("#dog3-container").hide();
+              $("#dog4-container").show();
+              $("#dog5-container").hide();
+              $("#dog6-container").hide();
+              $("#dog7-container").hide();
+              $("#dog8-container").hide();
+              $("#dog9-container").hide();
+              $("#dog10-container").hide();
+              $("#dog11-container").hide();
+
+              $('html, body').animate({
+                  scrollTop: $("#dog4-container").offset().top
+              }, 2000);
+            }
+            else if(optionValue == 'dog5')
+            {
+              $("#none-container").hide();
+              $("#dog1-container").hide();
+              $("#dog2-container").hide();
+              $("#dog3-container").hide();
+              $("#dog4-container").hide();
+              $("#dog5-container").show();
+              $("#dog6-container").hide();
+              $("#dog7-container").hide();
+              $("#dog8-container").hide();
+              $("#dog9-container").hide();
+              $("#dog10-container").hide();
+              $("#dog11-container").hide();
+
+              $('html, body').animate({
+                  scrollTop: $("#dog5-container").offset().top
+              }, 2000);
+            }
+            else if(optionValue == 'dog6')
+            {
+              $("#none-container").hide();
+              $("#dog1-container").hide();
+              $("#dog2-container").hide();
+              $("#dog3-container").hide();
+              $("#dog4-container").hide();
+              $("#dog5-container").hide();
+              $("#dog6-container").show();
+              $("#dog7-container").hide();
+              $("#dog8-container").hide();
+              $("#dog9-container").hide();
+              $("#dog10-container").hide();
+              $("#dog11-container").hide();
+
+              $('html, body').animate({
+                  scrollTop: $("#dog6-container").offset().top
+              }, 2000);
+            }
+            else if(optionValue == 'dog7')
+            {
+              $("#none-container").hide();
+              $("#dog1-container").hide();
+              $("#dog2-container").hide();
+              $("#dog3-container").hide();
+              $("#dog4-container").hide();
+              $("#dog5-container").hide();
+              $("#dog6-container").hide();
+              $("#dog7-container").show();
+              $("#dog8-container").hide();
+              $("#dog9-container").hide();
+              $("#dog10-container").hide();
+              $("#dog11-container").hide();
+
+              $('html, body').animate({
+                  scrollTop: $("#dog7-container").offset().top
+              }, 2000);
+            }
+            else if(optionValue == 'dog8')
+            {
+              $("#none-container").hide();
+              $("#dog1-container").hide();
+              $("#dog2-container").hide();
+              $("#dog3-container").hide();
+              $("#dog4-container").hide();
+              $("#dog5-container").hide();
+              $("#dog6-container").hide();
+              $("#dog7-container").hide();
+              $("#dog8-container").show();
+              $("#dog9-container").hide();
+              $("#dog10-container").hide();
+              $("#dog11-container").hide();
+
+              $('html, body').animate({
+                  scrollTop: $("#dog8-container").offset().top
+              }, 2000);
+            }
+            else if(optionValue == 'dog9')
+            {
+              $("#none-container").hide();
+              $("#dog1-container").hide();
+              $("#dog2-container").hide();
+              $("#dog3-container").hide();
+              $("#dog4-container").hide();
+              $("#dog5-container").hide();
+              $("#dog6-container").hide();
+              $("#dog7-container").hide();
+              $("#dog8-container").hide();
+              $("#dog9-container").show();
+              $("#dog10-container").hide();
+              $("#dog11-container").hide();
+
+              $('html, body').animate({
+                  scrollTop: $("#dog9-container").offset().top
+              }, 2000);
+            }
+            else if(optionValue == 'dog10')
+            {
+              $("#none-container").hide();
+              $("#dog1-container").hide();
+              $("#dog2-container").hide();
+              $("#dog3-container").hide();
+              $("#dog4-container").hide();
+              $("#dog5-container").hide();
+              $("#dog6-container").hide();
+              $("#dog7-container").hide();
+              $("#dog8-container").hide();
+              $("#dog9-container").hide();
+              $("#dog10-container").show();
+              $("#dog11-container").hide();
+
+              $('html, body').animate({
+                  scrollTop: $("#dog10-container").offset().top
+              }, 2000);
+            }
+            else if(optionValue == 'dog11')
+            {
+              $("#none-container").hide();
+              $("#dog1-container").hide();
+              $("#dog2-container").hide();
+              $("#dog3-container").hide();
+              $("#dog4-container").hide();
+              $("#dog5-container").hide();
+              $("#dog6-container").hide();
+              $("#dog7-container").hide();
+              $("#dog8-container").hide();
+              $("#dog9-container").hide();
+              $("#dog10-container").hide();
+              $("#dog11-container").show();
+
+              $('html, body').animate({
+                  scrollTop: $("#dog11-container").offset().top
+              }, 2000);
+            }
+        });
+    }).change();
+});
+    </script>    
+</body>
+</html>
